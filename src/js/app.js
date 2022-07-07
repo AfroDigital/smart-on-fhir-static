@@ -1,31 +1,24 @@
-
-// Our app is written in ES3 so that it works in older browsers!
-
-function createRenderer(id) {
-    const output = id ? document.getElementById(id) : document.body;
-    return function(data) {
-      output.innerHTML = data && typeof data === "object"
-        ? JSON.stringify(data, null, 4)
-        : String(data);
-    };
-  }
-  
   function App(client) {
     this.client = client;
+    this.patient;
+    this.observations;
   }
   
   App.prototype.fetchCurrentPatient = function() {
- 
     this.client.patient.read().then((data)=>{
-        console.log(data);
+      this.patient = data;
+      renderPatient(this.patient);
+      console.log(this.patient);
     });
   };
-  
-/*   App.prototype.fetchCurrentEncounter = function() {
-    var render = createRenderer("encounter");
+
+
+  App.prototype.fetchCurrentObservations = function() {
+   /*  var render = createRenderer("encounter");
     render("Loading...");
-    return this.client.encounter.read().then(render, render);
+    return this.client.encounter.read().then(render, render); */
   };
+/* 
   
   App.prototype.fetchCurrentUser = function() {
     var render = createRenderer("user");
@@ -34,9 +27,9 @@ function createRenderer(id) {
   }; */
   
   App.prototype.request = function(requestOptions, fhirOptions) {
-    var render = createRenderer("output");
-    render("Loading...");
-    return this.client.request(requestOptions, fhirOptions).then(render, render);
+    this.client.request(requestOptions, fhirOptions).then((data)=>{
+      console.log(data);
+  });
   };
   
   App.prototype.renderContext = function() {
@@ -47,7 +40,14 @@ function createRenderer(id) {
     ]);
   };
   
-  App.prototype.setLabel = function(containerId, label) {
-    document.getElementById(containerId).previousElementSibling.innerText = label;
-  };
-  
+
+  function renderPatient(patient){
+    const patientHTML = `<div class="w-100 d-flex flex-column p-5">
+              <p class="Name: ${patient.name}"></p>
+              <p class="Gender: ${patient.gender}"></p>
+              <p class="${patient.birthDate}"></p>
+            </div>`;
+
+    document.getElementById("patient").innerHTML = patientHTML;
+  }
+ 
