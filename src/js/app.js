@@ -4,7 +4,7 @@
 function createRenderer(id) {
     const output = id ? document.getElementById(id) : document.body;
     return function(data) {
-      output.innerText = data && typeof data === "object"
+      output.innerHTML = data && typeof data === "object"
         ? JSON.stringify(data, null, 4)
         : String(data);
     };
