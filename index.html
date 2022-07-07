@@ -25,8 +25,8 @@
       FHIR.oauth2.ready().then(function(client) {
           var app = new App(client);
           app.renderContext();
-          app.request("metadata");
-      }).catch(createRenderer("output"));
+          //app.request("metadata");
+      }).catch((err)=>{ console.log(err)});
   </script>
   </body>
 </html>
