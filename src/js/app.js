@@ -43,9 +43,9 @@
 
   function renderPatient(patient){
     const patientHTML = `<div class="w-100 d-flex flex-column p-5">
-              <p class="Name: ${patient.name}"></p>
-              <p class="Gender: ${patient.gender}"></p>
-              <p class="${patient.birthDate}"></p>
+              <h4>Name: ${patient.name}</h4>
+              <h4>Gender: ${patient.gender}</h4>
+              <h4>${patient.birthDate}</h4>
             </div>`;
 
     document.getElementById("patient").innerHTML = patientHTML;
