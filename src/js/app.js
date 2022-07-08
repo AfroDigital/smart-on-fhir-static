@@ -8,18 +8,17 @@
     this.client.patient.read().then((data)=>{
       this.patient = data;
       renderPatient(this.patient);
-      console.log(this.patient);
+      this.fetchCurrentObservations();
+     // console.log(this.patient);
     });
   };
 
 
   App.prototype.fetchCurrentObservations = function() {
 
-    return this.client.observation.read().then((data)=>{
-      this.observations = data;
-    
-      console.log(this.observations);
-    });
+    this.client.request(`Patient/${this.client.patient.id}/Observation?category=laboratory`).then((data)=>{
+      console.log(data);
+  });
   };
 /* 
   
@@ -38,7 +37,7 @@
   App.prototype.renderContext = function() {
     return Promise.all([
       this.fetchCurrentPatient(),
-      this.fetchCurrentObservations(),
+      //this.fetchCurrentObservations(),
       //this.fetchCurrentEncounter()
     ]);
   };
