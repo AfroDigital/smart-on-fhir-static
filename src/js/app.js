@@ -15,7 +15,7 @@
 
   App.prototype.fetchCurrentObservations = function() {
 
-    return this.client.observations.read().then((data)=>{
+    return this.client.observation.read().then((data)=>{
       this.observations = data;
     
       console.log(this.observations);
