@@ -16,7 +16,7 @@
 
   App.prototype.fetchCurrentObservations = function() {
 
-    this.client.request(`Patient/${this.client.patient.id}/Observation?category=laboratory`).then((data)=>{
+    this.client.request(`Patient/${this.client.patient.id}/Observation`).then((data)=>{
       console.log(data);
   });
   };
