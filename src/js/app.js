@@ -16,9 +16,9 @@
 
   App.prototype.fetchCurrentObservations = function() {
 
-    this.client.request(`Onservation?subject=${this.client.patient.id}`).then((data)=>{
-      console.log(data);
-  });
+    this.client.encounter.read().then((data)=>{  
+      console.log(this.data);
+    });
   };
 /* 
   
